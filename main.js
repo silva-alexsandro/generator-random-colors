@@ -1,21 +1,28 @@
-const btnGeneratorColors = document.getElementById("js-btn-generator-color");
-const newCard = document.getElementById("js-btn-new-card");
-const cards = document.getElementById("js-cards");
-const variationsContainer = document.getElementById("js-color-variations");
+const btnGeneratorColors = document.getElementById('js-btn-generator-color');
+const newCard = document.getElementById('js-btn-new-card');
+const cards = document.getElementById('js-cards');
+const variationsContainer = document.getElementById('js-color-variations');
+
+window.addEventListener('DOMContentLoaded', () => {
+  const btnNewCard = document.getElementById('js-btn-new-card');
+  if (btnNewCard) {
+    btnNewCard.focus();
+  }
+});
 
 const generateRandomHex = () => {
   return `#${Math.floor(Math.random() * 0xffffff)
     .toString(16)
-    .padStart(6, "0")}`;
+    .padStart(6, '0')}`;
 };
 
 const createCard = () => {
   const randomHex = generateRandomHex();
 
-  const card = document.createElement("li");
-  card.classList.add("card");
-  card.classList.add("shadow");
-  card.setAttribute("tabindex", "0");
+  const card = document.createElement('li');
+  card.classList.add('card');
+  card.classList.add('shadow');
+  card.setAttribute('tabindex', '0');
 
   card.innerHTML = `
    <header 
@@ -26,10 +33,10 @@ const createCard = () => {
     <span class="text" aria-live="polite">${randomHex}</span>
   `;
 
-  card.addEventListener("click", () => copyColor(randomHex, card));
+  card.addEventListener('click', () => copyColor(randomHex, card));
 
-  card.addEventListener("keypress", (event) => {
-    if (event.key === "Enter" || event.key === " ") {
+  card.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       copyColor(randomHex, card);
     }
@@ -39,20 +46,20 @@ const createCard = () => {
 };
 
 const generatePalette = () => {
-  const allCards = cards.querySelectorAll(".card");
+  const allCards = cards.querySelectorAll('.card');
 
   allCards.forEach((card) => {
     const newColor = generateRandomHex();
-    const colorBox = card.querySelector(".color-box");
-    const text = card.querySelector(".text");
+    const colorBox = card.querySelector('.color-box');
+    const text = card.querySelector('.text');
 
     colorBox.style.backgroundColor = newColor;
-    colorBox.setAttribute("aria-label", `Cor hexadecimal ${newColor}`);
+    colorBox.setAttribute('aria-label', `Cor hexadecimal ${newColor}`);
     text.textContent = newColor;
 
     card.onclick = () => copyColor(newColor, card);
   });
-  document.getElementById("feedback").textContent = "Novas cores geradas.";
+  document.getElementById('feedback').textContent = 'Novas cores geradas.';
 };
 
 const copyColor = async (color, card) => {
@@ -61,23 +68,23 @@ const copyColor = async (color, card) => {
 
     showColorOKLCH(color);
 
-    const feedback = document.createElement("div");
-    feedback.classList.add("copied-message");
-    feedback.textContent = "Copiado!";
+    const feedback = document.createElement('div');
+    feedback.classList.add('copied-message');
+    feedback.textContent = 'Copiado!';
     card.appendChild(feedback);
 
     setTimeout(() => feedback.remove(), 2000);
   } catch (error) {
-    console.error("Falha ao copiar cor:", error);
+    console.error('Falha ao copiar cor:', error);
   }
 };
 
 // **************** gerar oklch*******************
 // Converte HEX → RGB
 function hexToRgb(colorHex) {
-  colorHex = colorHex.replace("#", "");
+  colorHex = colorHex.replace('#', '');
   if (colorHex.length === 3)
-    (colorHex = colorHex.split("").map((ch) => ch + ch)), join("");
+    (colorHex = colorHex.split('').map((ch) => ch + ch)), join('');
   const bigint = parseInt(colorHex, 16);
   return [(bigint >> 16) & 255, (bigint >> 8) & 255, bigint & 255];
 }
@@ -86,7 +93,7 @@ function hexToRgb(colorHex) {
 function rgbToOklch(r, g, b) {
   try {
     const color = new Color(`rgb(${r}, ${g}, ${b})`);
-    const { l, c, h } = color.to("oklch");
+    const { l, c, h } = color.to('oklch');
     return [l, c, h];
   } catch {
     return rgbToOklchOld(r, g, b);
@@ -128,28 +135,28 @@ function gerarVariacoeOKLCH(hex) {
   const steps = [0.95, 0.85, 0.75, 0.65, 0.55, 0.45, 0.35, 0.25, 0.15, 0.05];
   return steps.map(
     (l) =>
-      `oklch(${(l * 100).toFixed(1)}% ${cBase.toFixed(3)} ${hBase.toFixed(1)})`,
+      `oklch(${(l * 100).toFixed(1)}% ${cBase.toFixed(3)} ${hBase.toFixed(1)})`
   );
 }
 
 function showColorOKLCH(color) {
-  variationsContainer.innerHTML = "";
+  variationsContainer.innerHTML = '';
   const colors = gerarVariacoeOKLCH(color);
   colors.forEach((c) => {
-    const article = document.createElement("article");
-    article.classList.add("color-swatch");
-    article.classList.add("shadow");
+    const article = document.createElement('article');
+    article.classList.add('color-swatch');
+    article.classList.add('shadow');
     article.style.backgroundColor = c;
 
     const lightness = parseFloat(c.match(/oklch\(([\d.]+)/)[1]);
-    article.style.color = lightness > 60 ? "#000" : "#fff";
+    article.style.color = lightness > 60 ? '#000' : '#fff';
 
     article.title = c;
-    article.textContent = c.replace("oklch(", "").replace(")", "");
-    article.addEventListener("click", () => navigator.clipboard.writeText(c));
+    article.textContent = c.replace('oklch(', '').replace(')', '');
+    article.addEventListener('click', () => navigator.clipboard.writeText(c));
     variationsContainer.appendChild(article);
   });
 }
 
-newCard.addEventListener("click", createCard);
-btnGeneratorColors.addEventListener("click", generatePalette);
+newCard.addEventListener('click', createCard);
+btnGeneratorColors.addEventListener('click', generatePalette);

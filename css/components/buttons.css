@@ -3,9 +3,12 @@
   align-items: center;
   justify-content: space-around;
   gap: 12px;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
-
+button:focus {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
 button#js-btn-generator-color {
   border-radius: 8px;
   padding: 12px 24px;
