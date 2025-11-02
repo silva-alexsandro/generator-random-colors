@@ -1,6 +1,7 @@
+/* ======== GRADE DE VARIAÇÕES DE COR ======== */
 .color-variations {
   display: grid;
-  grid-template-columns: repeat(10, 120px);
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
   gap: 8px;
   padding: 1rem;
   margin-top: 0.75rem;
@@ -10,6 +11,7 @@
   overflow-x: visible;
 }
 
+/* Cada amostra de cor */
 .color-swatch {
   padding: 0 4px;
   border-radius: 4px;
@@ -29,20 +31,33 @@
 .color-swatch:hover {
   transform: scale(1.05);
 }
+
+/* ======== RESPONSIVIDADE ======== */
+
+/* 📱 Dispositivos menores */
 @media (max-width: 767px) {
   .color-variations {
-    display: grid;
-    grid-template-columns: repeat(10, 120px);
+    display: flex;
     gap: 8px;
-    justify-content: flex-start; /* evita centralização quebrada */
-    overflow-x: auto; /* ativa o scroll lateral */
+    justify-content: flex-start;
+    padding: 1rem;
+    overflow-x: auto; /* scroll horizontal */
     overflow-y: hidden;
-    -webkit-overflow-scrolling: touch; /* scroll suave no mobile */
+    -webkit-overflow-scrolling: touch; /* scroll suave no iOS */
+    scroll-snap-type: x mandatory; /* scroll suave e preciso */
+  }
+
+  .color-swatch {
+    flex: 0 0 110px;
+    scroll-snap-align: start;
   }
 }
 
+/* 💻 Desktop */
 @media (min-width: 768px) {
   .color-variations {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
     justify-content: center;
     overflow: visible;
   }
