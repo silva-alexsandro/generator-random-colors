@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generator Color</title>
+    <link rel="stylesheet" href="./main.css" />
+    <script defer src="./main.js"></script>
+  </head>
+  <body>
+    <main>
+      <section id="hero">
+        <h1>Gerador de Cores</h1>
+        <p>
+          Gere cores aleatórias com apenas um clique. Adicione novos cards,
+          copie os códigos e inspire-se em novas combinações.
+        </p>
+      </section>
+
+      <section>
+        <ul
+          id="js-cards"
+          class="cards"
+          aria-label="Lista de cores geradas"
+        ></ul>
+      </section>
+
+      <section class="buttons-actions">
+        <button
+          id="js-btn-generator-color"
+          class="btn btn-square"
+          type="button"
+          aria-label="Gerar cores"
+          title="Gerar cores"
+        >
+          <span aria-hidden="true">gerar cores</span>
+        </button>
+        <button
+          id="js-btn-new-card"
+          class="btn"
+          type="button"
+          title="Adicionar novo card de cor"
+          aria-label="Adicionar novo card de cor"
+        >
+          <span aria-hidden="true">+</span>
+        </button>
+      </section>
+    </main>
+  </body>
+</html>
