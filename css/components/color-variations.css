@@ -1,64 +1,35 @@
-/* ======== GRADE DE VARIAÇÕES DE COR ======== */
 .color-variations {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  grid-template-columns: repeat(10, 50px);
   gap: 8px;
-  padding: 1rem;
-  margin-top: 0.75rem;
-  justify-content: center;
-  justify-items: center;
-  width: 100%;
-  overflow-x: visible;
+  overflow-x: auto; /* permite scroll horizontal em telas pequenas */
+  padding: 8px;
+  height: 70px;
 }
 
-/* Cada amostra de cor */
+/* Força o grid a se expandir e ocupar todo o espaço disponível em telas maiores */
+@media (min-width: 768px) {
+  .color-variations {
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    overflow-x: visible; /* remove o scroll quando cabe tudo */
+  }
+}
+
+/* Cada card */
 .color-swatch {
-  padding: 0 4px;
+  width: 50px;
+  height: 50px;
   border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  font-size: 0.75rem;
-  font-weight: 500;
-  aspect-ratio: 1 / 1;
+  font-size: 10px;
   cursor: pointer;
-  height: 110px;
   text-align: center;
-  transition: transform 0.2s;
+  user-select: none;
+  transition: transform 0.1s ease;
 }
 
 .color-swatch:hover {
-  transform: scale(1.05);
-}
-
-/* ======== RESPONSIVIDADE ======== */
-
-/* 📱 Dispositivos menores */
-@media (max-width: 767px) {
-  .color-variations {
-    display: flex;
-    gap: 8px;
-    justify-content: flex-start;
-    padding: 1rem;
-    overflow-x: auto; /* scroll horizontal */
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch; /* scroll suave no iOS */
-    scroll-snap-type: x mandatory; /* scroll suave e preciso */
-  }
-
-  .color-swatch {
-    flex: 0 0 110px;
-    scroll-snap-align: start;
-  }
-}
-
-/* 💻 Desktop */
-@media (min-width: 768px) {
-  .color-variations {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-    justify-content: center;
-    overflow: visible;
-  }
+  transform: scale(1.1);
 }

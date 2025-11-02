@@ -14,6 +14,7 @@ const createCard = () => {
 
   const card = document.createElement("li");
   card.classList.add("card");
+  card.classList.add("shadow");
   card.setAttribute("tabindex", "0");
 
   card.innerHTML = `
@@ -135,17 +136,18 @@ function showColorOKLCH(color) {
   variationsContainer.innerHTML = "";
   const colors = gerarVariacoeOKLCH(color);
   colors.forEach((c) => {
-    const div = document.createElement("div");
-    div.classList.add("color-swatch");
-    div.style.backgroundColor = c;
+    const article = document.createElement("article");
+    article.classList.add("color-swatch");
+    article.classList.add("shadow");
+    article.style.backgroundColor = c;
 
     const lightness = parseFloat(c.match(/oklch\(([\d.]+)/)[1]);
-    div.style.color = lightness > 60 ? "#000" : "#fff";
+    article.style.color = lightness > 60 ? "#000" : "#fff";
 
-    div.title = c;
-    div.textContent = c.replace("oklch(", "").replace(")", "");
-    div.addEventListener("click", () => navigator.clipboard.writeText(c));
-    variationsContainer.appendChild(div);
+    article.title = c;
+    article.textContent = c.replace("oklch(", "").replace(")", "");
+    article.addEventListener("click", () => navigator.clipboard.writeText(c));
+    variationsContainer.appendChild(article);
   });
 }
 
