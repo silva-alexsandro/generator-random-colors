@@ -1,0 +1,27 @@
+:root {
+  font-size: 62.5%;
+  --color-primary: #596869;
+  --color-secondary: #dde0e1;
+  --color-white: #fff;
+  --color-black: #000103;
+  --shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-size: 1.6rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  background: var(--color-white);
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}

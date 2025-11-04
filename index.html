@@ -21,50 +21,64 @@
     />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./src/css/main.css" />
 
     <!-- Script -->
-    <script defer src="./main.js"></script>
+    <script defer src="./src/js/main.js"></script>
   </head>
-
   <body>
-    <header class="header">
-      <h1 id="titulo-principal">Gerador de Cores</h1>
-    </header>
-    <main class="container">
-      <section class="contents" aria-labelledby="titulo-principal">
-        <ul
-          id="js-cards"
-          class="cards"
-          aria-label="Lista de cores geradas"
-        ></ul>
-      </section>
-      <section
-        id="js-color-variations"
-        class="color-variations"
-        aria-label="Variações da cor selecionada"
-      ></section>
-      <div id="botoes" role="group" aria-label="Ações">
-        <button
-          id="js-btn-generator-color"
-          class="btn btn-square"
-          type="button"
-          aria-label="Gerar cores"
-          title="Gerar cores"
+    <div class="container">
+      <header class="header">
+        <h1>GRColors</h1>
+        <a
+          href="https://www.linkedin.com/in/dasilva-alexsandro/"
+          class="profile"
+          aria-label="Perfil do desenvolvedor Alexsandro Silva no LinkedIn"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <span aria-hidden="true">Gerar cores</span>
-        </button>
-        <div id="feedback" class="visually-hidden" aria-live="polite"></div>
-        <button
-          id="js-btn-new-card"
-          class="btn"
-          type="button"
-          title="Adicionar novo card de cor"
-          aria-label="Adicionar novo card de cor"
-        >
-          <span aria-hidden="true">+</span>
-        </button>
+          <div class="avatar">
+            <img
+              src="https://avatars.githubusercontent.com/u/149261935?v=4"
+              alt="Foto do desenvolvedor Alexsandro Silva"
+            />
+          </div>
+          <small>Alexsandro Silva</small>
+        </a>
+      </header>
+
+      <div id="botoes" class="toolbar" role="group" aria-label="Ações">
+        <div class="act">
+          <button
+            id="js-btn-generator-color"
+            class="btn btn-square"
+            type="button"
+            aria-label="Gerar cores"
+            title="Gerar cores"
+          >
+            <span aria-hidden="true">Gerar cores</span>
+          </button>
+          <div id="feedback" class="visually-hidden" aria-live="polite"></div>
+          <button
+            id="js-btn-new-card"
+            class="btn"
+            type="button"
+            title="Adicionar novo card de cor"
+            aria-label="Adicionar novo card de cor"
+          >
+            <span aria-hidden="true">+</span>
+          </button>
+        </div>
       </div>
-    </main>
+      <main>
+        <section>
+          <ul
+            id="js-palette"
+            class="palette-container"
+            aria-label="Lista de cores geradas"
+          ></ul>
+        </section>
+      </main>
+    </div>
   </body>
 </html>
