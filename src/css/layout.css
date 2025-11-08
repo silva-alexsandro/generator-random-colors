@@ -55,8 +55,7 @@ header.header h1 {
   align-items: center;
   justify-content: space-between;
 }
-.toolbar__group{
-  /* border: 1px solid salmon; */
+.toolbar__group {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -69,7 +68,6 @@ section {
   height: 100%;
   display: flex;
   height: 100%;
-
 }
 
 .palette-container {
@@ -78,9 +76,10 @@ section {
   flex-direction: column;
   overflow: hidden;
   position: relative;
-  /* separação das colunas */
-  /* gap: 10px; */
-  /* padding: 10px; */
+}
+.palette-container.gapped {
+  gap: 10px;
+  padding: 10px;
 }
 .color-column {
   flex: 1;
@@ -113,4 +112,9 @@ section {
     flex-direction: row;
     position: relative;
   }
+}
+
+body.dark header.header h1,
+body.dark .btn {
+  color: var(--color-white);
 }

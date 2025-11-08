@@ -1,35 +1,40 @@
-import { palette, btnGeneratorColors } from './domElements.js';
+import { palette } from './domElements.js';
 import { generateRandomHex } from './colorUtils.js';
 import { showColorOKLCH } from './variations.js';
 import { history } from './main.js';
+
+function createElementLi(hex) {
+  const li = document.createElement('li');
+  li.classList.add('color-column', 'shadow');
+  li.setAttribute('tabindex', '0');
+  li.setAttribute('aria-label', `Cor hexadecimal ${hex}`);
+
+  li.style.backgroundColor = hex;
+
+  li.innerHTML = `<span class="text" aria-live="polite">${hex}</span>`;
+
+  li.addEventListener('click', () => copyColor(hex, li));
+
+  li.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      copyColor(hex, li);
+    }
+  });
+  return li;
+}
 
 export function createCard() {
   if (palette.children.length >= 15) return;
 
   const randomHex = generateRandomHex();
-  const li = document.createElement('li');
-  li.classList.add('color-column', 'shadow');
-  li.tabIndex = 0;
-  li.setAttribute('aria-label', `Cor hexadecimal ${randomHex}`);
-  li.style.backgroundColor = randomHex;
-  li.innerHTML = `<span class="text">${randomHex}</span>`;
-
-  li.addEventListener('click', () => copyColor(randomHex, li));
-  li.addEventListener('keypress', e => {
-    if (['Enter', ' '].includes(e.key)) {
-      e.preventDefault();
-      copyColor(randomHex, li);
-    }
-  });
-
-  palette.appendChild(li);
-
+  palette.appendChild(createElementLi(randomHex));
   history.execute(getCurrentPaletteState());
 }
 
 export function generatePalette() {
   const cards = palette.querySelectorAll('.color-column');
-  cards.forEach(card => {
+  cards.forEach((card) => {
     const newColor = generateRandomHex();
     card.style.backgroundColor = newColor;
     card.querySelector('.text').textContent = newColor;
@@ -54,17 +59,12 @@ export async function copyColor(color, card) {
 }
 
 export function getCurrentPaletteState() {
-  return Array.from(palette.children).map(card => card.querySelector('.text').textContent);
+  return Array.from(palette.children).map(
+    (card) => card.querySelector('.text').textContent
+  );
 }
 
 export function restorePaletteState(state) {
   palette.innerHTML = '';
-  state.forEach(hex => {
-    const li = document.createElement('li');
-    li.classList.add('color-column', 'shadow');
-    li.style.backgroundColor = hex;
-    li.innerHTML = `<span class="text">${hex}</span>`;
-    li.onclick = () => copyColor(hex, li);
-    palette.appendChild(li);
-  });
+  state.forEach((hex) => palette.appendChild(createElementLi(hex)));
 }

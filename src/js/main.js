@@ -227,6 +227,7 @@
 // );
 // newCard.addEventListener('click', createCard);
 // btnGeneratorColors.addEventListener('click', generatePalette);
+
 import { btnUndo, btnRedo } from './domElements.js';
 import { createHistoryManager } from './historyManager.js';
 import { restorePaletteState } from './cardManager.js';
@@ -242,5 +243,7 @@ export const history = createHistoryManager([], {
 
 document.addEventListener('DOMContentLoaded', () => {
   setupEvents();
+   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+   console.log(prefersDark)
   document.getElementById('js-btn-new-card').focus();
 });

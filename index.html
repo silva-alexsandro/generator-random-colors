@@ -45,6 +45,7 @@
           class="profile"
           aria-label="Perfil do desenvolvedor Alexsandro Silva no LinkedIn"
           target="_blank"
+          title="LinkedIn do desenvolvedor Alexsandro Silva"
           rel="noopener noreferrer"
         >
           <div class="avatar">
@@ -53,7 +54,6 @@
               alt="Foto do desenvolvedor Alexsandro Silva"
             />
           </div>
-          <small>Alexsandro Silva</small>
         </a>
       </header>
 
@@ -66,7 +66,7 @@
             aria-label="Modificar as cores"
             title="Modificar as cores"
           >
-            <span aria-hidden="true">Modificar as cores</span>
+            <span aria-hidden="true">Gerar cores</span>
           </button>
           <div id="feedback" class="visually-hidden" aria-live="polite"></div>
           <button
@@ -98,28 +98,34 @@
           >
             <i class="ph ph-arrow-bend-up-right"></i>
           </button>
-          <!-- <button
+          <button
+            title="Informação"
+            aria-label="Abrir Informação"
+            class="btn"
+            id="js-info"
+            disabled
+          >
+            <i class="ph ph-info"></i>
+          </button>
+          <button
             title="Configurações"
             aria-label="Abrir configurações"
             class="btn"
+            id="js-config"
           >
             <i class="ph ph-gear"></i>
-            <span>Configurações</span>
           </button>
+
           <button
             title="Exportar"
             aria-label="Exportar palleta de cores"
             class="btn"
+            disabled
           >
             <i class="ph ph-export"></i> <span>Exportar</span>
           </button>
-          <button
-            title="Modificar Tema"
-            aria-label="Modificar tema escuro"
-            class="btn"
-          >
-            <i class="ph ph-export"></i>
-          </button> -->
+
+          <!---->
         </div>
       </nav>
 
@@ -132,6 +138,47 @@
           ></ul>
         </section>
       </main>
+    </div>
+
+    <!-- Modal de Configurações -->
+    <div
+      id="modal"
+      class="overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      <div class="modal__contents">
+        <header class="modal__header">
+          <h2>Configuração</h2>
+          <button class="close btn" aria-label="Fechar janela de configurações">
+            &times;
+          </button>
+        </header>
+        <form class="modal__settings">
+          <fieldset class="modal__theme">
+            <div class="campo">
+              <label for="theme" class="">Tema principal:</label>
+              <select name="theme" id="theme">
+                <option value="claro">Claro</option>
+                <option value="escuro">Escuro</option>
+                <option value="sistema">Usar tema do sistema</option>
+              </select>
+            </div>
+          </fieldset>
+          <fieldset class="modal__checkboxes">
+            <label>
+              Separar cores
+              <input type="checkbox" name="gapColumns" />
+            </label>
+
+            <label>
+              Tela cheia
+              <input type="checkbox" name="fullmode" />
+            </label>
+          </fieldset>
+        </form>
+      </div>
     </div>
   </body>
 </html>
